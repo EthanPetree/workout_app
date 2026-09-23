@@ -8,7 +8,7 @@ app.use(express.json());
 app.use("/workouts", workoutRouter);
 
 app.get("/", (req, res, send) => {
-    res.send("hallo");
+    res.send("hallo guys");
 });
 
 app.use((err, req, res, next) => {

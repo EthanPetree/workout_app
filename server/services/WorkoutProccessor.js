@@ -83,7 +83,7 @@ class WorkoutProccessor {
     static async updateWorkouts(workouts) {
         const data = JSON.stringify(workouts);
         try {
-            await fs.writeFile("./workoutsData.json", data, "utf-8");
+            await fs.writeFile("./data/workoutsData.json", data, "utf-8");
         } catch (e) {
             if (e.code === "ENOENT") return [];
             console.error(e);
@@ -93,7 +93,7 @@ class WorkoutProccessor {
     static async readWorkoutsFromFile() {
         let workouts;
         try {
-            workouts = await fs.readFile("./workoutsData.json");
+            workouts = await fs.readFile("./data/workoutsData.json");
         } catch (e) {
             if (e.code === "ENOENT") return [];
             console.error(e);
