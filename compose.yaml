@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL:-postgres://ethanpetree:hellohecker@db:5432/mydb}"
     ports:
     # Standard port
     - "5432:5432"
