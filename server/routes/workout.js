@@ -24,15 +24,15 @@ router.post("/", async (req, res, next) => {
         let success = await WorkoutProccessor.pushWorkout(workout);
         if (success) {
             res.status(201).json({
-            workout,
-        });
+                workout,
+            });
         } else {
             res.status(404).json({
-                "success": false,
-                "message": "Validation failed",
-                "errors": {
+                success: false,
+                message: "Validation failed",
+                errors: {
                     // should middleware or something go around here?
-                }
+                },
             });
         }
     } catch (e) {
@@ -52,17 +52,16 @@ router.put("/:id", async (req, res, next) => {
                 exercises: data.exercises,
             };
             let success = await WorkoutProccessor.updateWorkout(workout);
-            if (success){
+            if (success) {
                 return res
-                .status(200)
-                .json({ message: "success", result: workout });
+                    .status(200)
+                    .json({ message: "success", result: workout });
             } else {
                 return res.status(404).json({
-                    "success": false,
-                    "message": "Item not found."
+                    success: false,
+                    message: "Item not found.",
                 });
             }
-            
         }
     } catch (e) {
         next(e);
@@ -76,12 +75,12 @@ router.delete("/:id", async (req, res, next) => {
         if (success) {
             return res.sendStatus(204);
         } else {
-                return res.status(400).json({
-                    "success": false,
-                    "message": "Item not found."
-                });
-            }
-    } catch (e){
+            return res.status(400).json({
+                success: false,
+                message: "Item not found.",
+            });
+        }
+    } catch (e) {
         next(e);
     }
 });
