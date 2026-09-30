@@ -1,34 +1,38 @@
 services:
-  db:
-    image: postgres:15-alpine
-    container_name: database_container
-    restart: always
-    environment:
-    # automatically looks for .env files
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
-      DATABASE_URL: ${DATABASE_URL:-postgres://ethanpetree:hellohecker@db:5432/mydb}"
-    ports:
-    # Standard port
-    - "5432:5432"
-    volumes:
-    - db_data:/var/lib/postgresql/data
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: workout_app_container
-    restart: always
-    ports:
-    - "3000:3000"
-    # environment:
-    depends_on:
-    - db
-    volumes:
-    - ./server:/server
-    - workout_data:/server/data
+    db:
+        image: postgres:15-alpine
+        container_name: database_container
+        restart: always
+        environment:
+            # automatically looks for .env files
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
+            DATABASE_URL: ${DATABASE_URL:-postgres://ethanpetree:hellohecker@db:5432/mydb}"
+        ports:
+            # Standard port
+            - "5432:5432"
+        volumes:
+            - db_data:/var/lib/postgresql/data
+    web:
+        build:
+            context: .
+            dockerfile: ./server/Dockerfile
+        container_name: workout_app_container
+        command: npm run debug
+        restart: always
+        ports:
+            - "3000:3000"
+            - "9229:9229"
+        # environment:
+        depends_on:
+            - db
+        volumes:
+            - .:/workspace
+            # # 3. Industry Standard Anonymous Volume (Hides dependencies from the host)
+            - /workspace/server/node_modules
+            - workout_data:/server/data
 
 volumes:
-  workout_data:
-  db_data:
+    workout_data:
+    db_data:

@@ -5,48 +5,41 @@
     "version": "0.2.0",
     "configurations": [
         {
-      "name": "Launch Backend (Nodemon)",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "nodemon",
-      "program": "${workspaceFolder}/src/index.js",
-      "restart": true,
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "env": {
-        "NODE_ENV": "development",
-        "PORT": "3000"
-      },
-      "skipFiles": [
-        "<node_internals>/**",
-        "${workspaceFolder}/node_modules/**"
-      ]
-    },
-    {
-      "name": "Run Current File",
-      "type": "node",
-      "request": "launch",
-      "program": "${file}",
-      "console": "integratedTerminal",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
-    },
-    {
-      "name": "Debug Jest Tests",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
-      "args": [
-        "--runInBand",
-        "--watchAll=false"
-      ],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "skipFiles": [
-        "<node_internals>/**",
-        "${workspaceFolder}/node_modules/**"
-      ]
-    }
+            "name": "Attach to Backend",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "restart": true,
+            "cwd": "${workspaceFolder}/server",
+            "skipFiles": [
+                "<node_internals>/**",
+                "${workspaceFolder}/server/node_modules/**"
+            ]
+        },
+        {
+            "name": "Run Current File",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/server",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "skipFiles": [
+                "<node_internals>/**",
+                "${workspaceFolder}/server/node_modules/**"
+            ]
+        },
+        {
+            "name": "Debug Jest Tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/server/node_modules/jest/bin/jest.js",
+            "args": ["--runInBand", "--watchAll=false"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": [
+                "<node_internals>/**",
+                "${workspaceFolder}/server/node_modules/**"
+            ]
+        }
     ]
 }

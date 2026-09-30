@@ -1,32 +1,31 @@
 // .devcontainer/devcontainer.json
 {
-  "name": "Node.js Docker Compose Dev Environment",
-  // 1. Tell VS Code to use your existing docker-compose.yml file
-  "dockerComposeFile": [
-    "../compose.yaml"
-  ],
-  // 2. Specify which service in your docker-compose file VS Code should enter
-  "service": "web", 
-  // 3. The path inside the container where your workspace is mounted
-  "workspaceFolder": "/server",
+    "name": "Node.js Docker Compose Dev Environment",
+    // 1. Tell VS Code to use your existing docker-compose.yml file
+    "dockerComposeFile": ["../compose.yaml"],
+    // 2. Specify which service in your docker-compose file VS Code should enter
+    "service": "web",
+    // 3. The path inside the container where your workspace is mounted
+    "workspaceFolder": "/workspace",
 
-  // 4. Configure settings and automatically install extensions INSIDE the container
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
-      },
-      "extensions": [
-        "dbaeumer.vscode-eslint",      // Linter
-        "esbenp.prettier-vscode",      // Code Formatter
-        "ms-azuretools.vscode-docker"  // Docker management inside the container
-      ]
-    }
-  },
+    // 4. Configure settings and automatically install extensions INSIDE the container
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "dbaeumer.vscode-eslint", // Linter
+                "esbenp.prettier-vscode", // Code Formatter
+                "ms-azuretools.vscode-docker", // Docker management inside the container
+                "ckolkman.vscode-postgres"
+            ]
+        }
+    },
 
-  // 5. Ensures the container doesn't shut down immediately when VS Code connects
-  "overrideCommand": true,
+    // 5. Ensures the container doesn't shut down immediately when VS Code connects
+    "overrideCommand": true,
 
-  // 6. Connect as a non-root user for security (optional, match your Dockerfile user if needed)
-  "remoteUser": "node"
+    // 6. Connect as a non-root user for security (optional, match your Dockerfile user if needed)
+    "remoteUser": "node"
 }

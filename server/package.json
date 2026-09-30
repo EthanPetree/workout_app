@@ -1,20 +1,21 @@
 {
-  "name": "workout_app",
-  "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "Ethan P",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
-  },
-  "dependencies": {
-    "dotenv": "^18.0.4",
-    "ejs": "^6.0.1",
-    "express": "^5.2.1",
-    "nodemon": "^3.1.14",
-    "pg": "^8.23.0"
-  }
+    "name": "workout_app",
+    "version": "1.0.0",
+    "description": "",
+    "license": "ISC",
+    "author": "Ethan P",
+    "type": "commonjs",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon index.js",
+        "debug": "nodemon --inspect=0.0.0.0:9229 index.js"
+    },
+    "dependencies": {
+        "dotenv": "^18.0.4",
+        "ejs": "^6.0.1",
+        "express": "^5.2.1",
+        "nodemon": "^3.1.14",
+        "pg": "^8.23.0"
+    }
 }
