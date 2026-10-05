@@ -13,11 +13,13 @@ services:
             # Standard port
             - "5432:5432"
         volumes:
+            # path on the right is the filepath to the data in a standard postgres container
             - db_data:/var/lib/postgresql/data
     web:
         build:
             context: .
             dockerfile: ./server/Dockerfile
+        image: ethanjpetree/workout-app:latest # Forces the build to use this exact name
         container_name: workout_app_container
         command: npm run debug
         restart: always
@@ -28,6 +30,7 @@ services:
         depends_on:
             - db
         volumes:
+            # takes the whole project and puts it into a /workspace volume, useful for the dev containers
             - .:/workspace
             # # 3. Industry Standard Anonymous Volume (Hides dependencies from the host)
             - /workspace/server/node_modules

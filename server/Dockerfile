@@ -6,7 +6,7 @@ WORKDIR /workspace/server
 COPY ./server/package.json ./server/package-lock.json ./
 RUN npm install
 
-# research what the training / does
+# trailing / makes no real difference
 COPY ./server/ .
 
 EXPOSE 3000

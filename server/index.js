@@ -1,5 +1,5 @@
 const express = require("express");
-const workoutRouter = require("./routes/workout");
+const workoutRouter = require("./routes/workoutRouter");
 const app = express();
 const PORT = 3000;
 
@@ -13,9 +13,9 @@ app.get("/", (req, res, send) => {
 
 app.use((err, req, res, next) => {
     console.error("Server Error Logged:", err.stack);
-    
-    res.status(500).json({ 
-        error: "Something went wrong on the server." 
+
+    res.status(500).json({
+        error: "Something went wrong on the server.",
     });
 });
 

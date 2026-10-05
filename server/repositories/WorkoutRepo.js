@@ -1,6 +1,15 @@
 const db = require("./db_connection.js");
 
 class WorkoutRepo {
+    static async exists(id) {
+        const text = "SELECT 1 FROM workout WHERE workout_id = $1 LIMIT 1";
+        const values = [id];
+
+        const result = await db.query(text, values);
+
+        return result?.rows.length > 0;
+    }
+
     static async findWorkoutById(id) {
         const text = "SELECT * FROM workout WHERE workout_id = $1";
         const values = [id];
@@ -29,11 +38,10 @@ class WorkoutRepo {
         return result?.values;
     }
 
-    static async modifyWorkout(type, length, id) {
+    static async updateWorkout(type, length, id) {
         if (!(type && length)) return 0;
 
-        const text =
-            "UPDATE workout SET type = $1, length = $2 WHERE workout_id = $3";
+        const text = "UPDATE workout SET type = $1, length = $2 WHERE workout_id = $3";
         const values = [type, length, id];
 
         const result = await db.query(text, values);
@@ -77,23 +85,21 @@ class WorkoutRepo {
     }
 
     static async addExercise(workout_id, exercise_id, sequence_order) {
-        const text =
-            "INSERT INTO workout_exercises (workout_id, exercise_id, sequence_order) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING";
+        const text = "INSERT INTO workout_exercises (workout_id, exercise_id, sequence_order) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING";
         const values = [workout_id, exercise_id, sequence_order];
 
         const result = await db.query(text, values);
 
-        return result;
+        return result?.rowCount;
     }
 
     static async removeExercise(workout_id, exercise_id) {
-        const text =
-            "DELETE FROM workout_exercises WHERE workout_id = $1 AND exercise_id = $2";
+        const text = "DELETE FROM workout_exercises WHERE workout_id = $1 AND exercise_id = $2";
         const values = [workout_id, exercise_id];
 
         const result = await db.query(text, values);
 
-        return result;
+        return result?.rowCount;
     }
 }
 

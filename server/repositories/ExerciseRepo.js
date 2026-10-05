@@ -2,6 +2,15 @@ const db = require("./db_connection.js");
 
 // await db.query('query here');
 class ExerciseRepo {
+    static async exists(id) {
+        const text = "SELECT 1 FROM exercises WHERE exercise_id = $1 LIMIT 1";
+        const values = [id];
+
+        const result = await db.query(text, values);
+
+        return result?.rows.length > 0;
+    }
+
     static async findExerciseById(id) {
         // \d table_name for the schema
         const text = "SELECT * FROM exercises WHERE exercise_id = $1";
@@ -68,8 +77,7 @@ class ExerciseRepo {
     static async modifyExercise(name, category, id) {
         if (!(name && category)) return 0;
 
-        const text =
-            "UPDATE exercises SET name = $1, category = $2 WHERE exercise_id = $3";
+        const text = "UPDATE exercises SET name = $1, category = $2 WHERE exercise_id = $3";
         const values = [name, category, id];
 
         const result = await db.query(text, values);
