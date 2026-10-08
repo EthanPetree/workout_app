@@ -1,0 +1,16 @@
+services:
+    db:
+        ports:
+            # Standard port
+            - "5432:5432"
+    web:
+        build:
+            target: dev
+        command: npm run debug
+        ports:
+            - "9229:9229"
+        volumes:
+            # takes the whole project and puts it into a /workspace volume, useful for the dev containers
+            - .:/workspace
+            # # 3. Industry Standard Anonymous Volume (Hides dependencies from the host)
+            - /workspace/server/node_modules
